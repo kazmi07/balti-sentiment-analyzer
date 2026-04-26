@@ -72,12 +72,12 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     try:
-        model = joblib.load('model/balti_model.pkl')
-        vectorizer = joblib.load('model/vectorizer.pkl')
-        pos_lex = joblib.load('model/positive_lexicon.pkl')
-        neg_lex = joblib.load('model/negative_lexicon.pkl')
-        neu_lex = joblib.load('model/neutral_lexicon.pkl')
-        model_type = joblib.load('model/model_type.pkl')
+        model = joblib.load('balti_model.pkl')
+        vectorizer = joblib.load('vectorizer.pkl')
+        pos_lex = joblib.load('positive_lexicon.pkl')
+        neg_lex = joblib.load('negative_lexicon.pkl')
+        neu_lex = joblib.load('neutral_lexicon.pkl')
+        model_type = joblib.load('model_type.pkl')
         return model, vectorizer, pos_lex, neg_lex, neu_lex, model_type
     except FileNotFoundError:
         st.error("❌ Model not found! Please run model_train.py first.")
