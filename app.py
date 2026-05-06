@@ -15,7 +15,7 @@ import re
 # Page configuration
 st.set_page_config(
     page_title="Balti Sentiment Analyzer",
-    page_icon="🎯",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -80,10 +80,10 @@ def load_model():
         model_type = joblib.load('balti_model_type.pkl')
         return model, vectorizer, pos_lex, neg_lex, neu_lex, model_type
     except FileNotFoundError:
-        st.error("❌ Model not found! Please run model_train.py first.")
+        st.error(" Model not found! Please run model_train.py first.")
         st.stop()
     except Exception as e:
-        st.error(f"❌ Error loading model: {e}")
+        st.error(f" Error loading model: {e}")
         st.stop()
 
 # Lexicon feature extraction
@@ -125,15 +125,15 @@ def predict_sentiment(text, model, vectorizer, pos_lex, neg_lex, neu_lex, model_
 # Sidebar
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/000000/language.png", width=80)
-    st.title("📊 About")
+    st.title(" About")
     st.write("""
     **Balti Sentiment Analyzer** uses Machine Learning to detect emotions in Balti language text.
     
     ### Features:
-    - 🎯 Real-time sentiment detection
-    - 📈 Confidence scores
-    - 📊 Analysis history
-    - 💾 Export results
+    -  Real-time sentiment detection
+    -  Confidence scores
+    -  Analysis history
+    -  Export results
     
     ### Model Info:
     - Algorithm: Naive Bayes
@@ -146,14 +146,14 @@ with st.sidebar:
     
     st.divider()
     
-    st.subheader("⚙️ Settings")
+    st.subheader(" Settings")
     auto_clear = st.checkbox("Auto-clear after analysis", value=False)
     show_details = st.checkbox("Show detailed analysis", value=True)
 
 # Main header
 st.markdown("""
 <div class="main-header">
-    <h1>🎯 Balti Sentiment Analyzer</h1>
+    <h1> Balti Sentiment Analyzer</h1>
     <p>بلتی جذباتی تجزیہ کار | བལ་ཏི་ སེམས་ཁམས་ དབྱེ་བའི་ ལག་ཆ</p>
 </div>
 """, unsafe_allow_html=True)
@@ -171,7 +171,7 @@ if 'analysis_count' not in st.session_state:
 col1, col2 = st.columns([3, 2])
 
 with col1:
-    st.subheader("📝 Enter Balti Text")
+    st.subheader(" Enter Balti Text")
     
     # Example suggestions
     examples = [
@@ -193,7 +193,7 @@ with col1:
     analyze_button = st.button("🔍 Analyze Sentiment", type="primary", use_container_width=True)
 
 with col2:
-    st.subheader("💡 Tips")
+    st.subheader(" Tips")
     st.info("""
     **Examples to try:**
     - Positive: `chi liyahmo jaq chi yd` (What a great day)
@@ -228,7 +228,7 @@ if analyze_button and user_input:
         
         # Display result
         st.divider()
-        st.subheader("📊 Analysis Result")
+        st.subheader(" Analysis Result")
         
         # Result boxes
         col1, col2, col3 = st.columns([2, 1, 1])
@@ -268,7 +268,7 @@ if analyze_button and user_input:
             st.metric("Characters", len(user_input))
         
         # Confidence bars
-        st.subheader("📈 Confidence Scores")
+        st.subheader(" Confidence Scores")
         
         colors = {'positive': '#28a745', 'negative': '#dc3545', 'neutral': '#ffc107'}
         
@@ -278,7 +278,7 @@ if analyze_button and user_input:
         
         # Detailed analysis
         if show_details:
-            st.subheader("🔬 Detailed Analysis")
+            st.subheader(" Detailed Analysis")
             
             col1, col2 = st.columns(2)
             
@@ -315,7 +315,7 @@ if analyze_button and user_input:
 # History section
 if len(st.session_state.history) > 0:
     st.divider()
-    st.subheader("📜 Analysis History")
+    st.subheader(" Analysis History")
     
     col1, col2 = st.columns([3, 1])
     
@@ -325,7 +325,7 @@ if len(st.session_state.history) > 0:
         
         # Add color indicator
         history_df['indicator'] = history_df['sentiment'].apply(
-            lambda x: '🟢' if x == 'positive' else ('🔴' if x == 'negative' else '🟡')
+            lambda x: '' if x == 'positive' else ('' if x == 'negative' else '')
         )
         
         # Display history
@@ -347,7 +347,7 @@ if len(st.session_state.history) > 0:
         st.plotly_chart(fig, use_container_width=True)
     
     # Export button
-    if st.button("📥 Export History to CSV"):
+    if st.button(" Export History to CSV"):
         csv = history_df.to_csv(index=False)
         st.download_button(
             label="Download CSV",
@@ -357,7 +357,7 @@ if len(st.session_state.history) > 0:
         )
     
     # Clear history button
-    if st.button("🗑️ Clear History", type="secondary"):
+    if st.button(" Clear History", type="secondary"):
         st.session_state.history = []
         st.rerun()
 
@@ -365,7 +365,7 @@ if len(st.session_state.history) > 0:
 st.divider()
 st.markdown("""
 <div style="text-align: center; color: #666;">
-    <p>Balti Sentiment Analyzer v1.0 | Built with Streamlit 🤝 for Balti Language Community</p>
+    <p>Balti Sentiment Analyzer v1.0 | Built with Streamlit  for Balti Language Community</p>
     <p>🟢 Positive | 🔴 Negative | 🟡 Neutral</p>
 </div>
 """, unsafe_allow_html=True)
